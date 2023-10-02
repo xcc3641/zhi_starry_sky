@@ -1,6 +1,6 @@
 name: zhi_starry_sky
 description: Flutter Starry Sky Animation Widget.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/xcc3641/zhi_strarry_sky
 
 environment:
@@ -16,10 +16,4 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
-
-flutter:
-  plugin:
-    platforms:
-      some_platform:
-        pluginClass: somePluginClass
 

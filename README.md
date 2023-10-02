@@ -8,4 +8,4 @@ A starry sky animation component that can be easily used and customized.
 
 # Installation
 
-Grab it from [pub.dev]().
+Grab it from [pub.dev](https://pub.dev/packages/zhi_starry_sky/score).
