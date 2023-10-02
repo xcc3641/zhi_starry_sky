@@ -25,6 +25,9 @@ jobs:
           flutter-version: "3.13.6"
           channel: 'stable'
           cache: true
+          
+      - name: example dir
+        run: cd example/
 
       - name: Get dependencies
         run: flutter pub get
