@@ -3,41 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:zhi_starry_sky/src/particle.dart';
 
-class StarrySkyPainter extends CustomPainter {
-  final List<Particle> particles;
-  final List<Particle> bigParticles;
-
-  StarrySkyPainter({required this.particles, required this.bigParticles});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    // Draw each particle
-    for (var particle in particles) {
-      final paint = Paint()
-        ..color = particle.color.withOpacity(particle.opacity)
-        ..style = PaintingStyle.fill;
-
-      canvas.drawCircle(particle.position, particle.size * particle.scale, paint);
-    }
-
-    // Draw each big particle with a blur effect
-    for (var particle in bigParticles) {
-      final paint = Paint()
-        ..color = particle.color.withOpacity(particle.opacity)
-        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 60);
-
-      canvas.drawCircle(particle.position, particle.size * particle.scale, paint);
-    }
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
-  }
-}
-
 class StarrySkyView extends StatefulWidget {
-  const StarrySkyView({super.key});
+  const StarrySkyView({Key? key}) : super(key: key);
 
   @override
   State<StarrySkyView> createState() => _StarrySkyViewState();
@@ -66,8 +33,6 @@ class _StarrySkyViewState extends State<StarrySkyView> with SingleTickerProvider
   @override
   void initState() {
     super.initState();
-
-    // Initialize the animation controller
     _animationController = AnimationController(
       duration: const Duration(seconds: 5),
       vsync: this,
@@ -76,7 +41,7 @@ class _StarrySkyViewState extends State<StarrySkyView> with SingleTickerProvider
     _animationController.addListener(() {
       _animateParticles(particles);
       _animateParticles(bigParticles);
-      setState(() {}); // Trigger a rebuild to repaint the particles
+      setState(() {});
     });
   }
 
@@ -159,5 +124,38 @@ class _StarrySkyViewState extends State<StarrySkyView> with SingleTickerProvider
   void dispose() {
     _animationController.dispose();
     super.dispose();
+  }
+}
+
+class StarrySkyPainter extends CustomPainter {
+  final List<Particle> particles;
+  final List<Particle> bigParticles;
+
+  StarrySkyPainter({required this.particles, required this.bigParticles});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    // Draw each particle
+    for (var particle in particles) {
+      final paint = Paint()
+        ..color = particle.color.withOpacity(particle.opacity)
+        ..style = PaintingStyle.fill;
+
+      canvas.drawCircle(particle.position, particle.size * particle.scale, paint);
+    }
+
+    // Draw each big particle with a blur effect
+    for (var particle in bigParticles) {
+      final paint = Paint()
+        ..color = particle.color.withOpacity(particle.opacity)
+        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 60);
+
+      canvas.drawCircle(particle.position, particle.size * particle.scale, paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
   }
 }
