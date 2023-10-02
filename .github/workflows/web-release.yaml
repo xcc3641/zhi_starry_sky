@@ -25,15 +25,12 @@ jobs:
           flutter-version: "3.13.6"
           channel: 'stable'
           cache: true
-          
-      - name: example dir
-        run: cd example/
 
       - name: Get dependencies
         run: flutter pub get
 
       - name: Start Web Release Build
-        run: flutter build web --release
+        run:  cd example && flutter build web --release
 
       - name: Upload Web Build Files
         uses: actions/upload-artifact@v2
